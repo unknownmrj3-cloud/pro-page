@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Unlock Pro – Smart Dictionary</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+      font-family: "Segoe UI", system-ui, -apple-system, sans-serif;
+    }
+
+    body {
+      margin: 0;
+      background: #f8fafc;
+      color: #0f172a;
+    }
+
+    .container {
+      max-width: 900px;
+      margin: auto;
+      padding: 24px;
+    }
+
+    header {
+      text-align: center;
+      margin-bottom: 32px;
+    }
+
+    header h1 {
+      font-size: 32px;
+      color: #2563eb;
+      margin-bottom: 8px;
+    }
+
+    header p {
+      color: #64748b;
+      font-size: 16px;
+    }
+
+    .card {
+      background: #ffffff;
+      border-radius: 14px;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.06);
+      padding: 24px;
+      margin-bottom: 24px;
+    }
+
+    .plans {
+      display: flex;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+
+    .plan {
+      flex: 1;
+      border: 2px solid #e5e7eb;
+      border-radius: 12px;
+      padding: 20px;
+      text-align: center;
+      transition: 0.2s;
+    }
+
+    .plan:hover {
+      transform: translateY(-4px);
+      border-color: #2563eb;
+    }
+
+    .plan h3 {
+      margin: 0;
+      color: #2563eb;
+    }
+
+    .price {
+      font-size: 28px;
+      font-weight: bold;
+      margin: 12px 0;
+      color: #16a34a;
+    }
+
+    .plan ul {
+      list-style: none;
+      padding: 0;
+      font-size: 14px;
+      color: #475569;
+    }
+
+    .plan ul li {
+      margin: 6px 0;
+    }
+
+    .pay-section {
+      text-align: center;
+    }
+
+    .qr {
+      width: 220px;
+      max-width: 100%;
+      margin: 16px auto;
+      border-radius: 12px;
+      border: 1px solid #e5e7eb;
+    }
+
+    input {
+      width: 100%;
+      padding: 12px;
+      font-size: 15px;
+      border-radius: 8px;
+      border: 1px solid #cbd5f5;
+      margin-top: 10px;
+    }
+
+    button {
+      width: 100%;
+      margin-top: 12px;
+      padding: 12px;
+      font-size: 16px;
+      background: #2563eb;
+      color: #fff;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: 0.2s;
+    }
+
+    button:hover {
+      background: #1d4ed8;
+    }
+
+    .license-box {
+      margin-top: 16px;
+      background: #ecfdf5;
+      border: 1px dashed #16a34a;
+      padding: 12px;
+      border-radius: 8px;
+      font-weight: bold;
+      color: #065f46;
+      display: none;
+    }
+
+    footer {
+      text-align: center;
+      font-size: 13px;
+      color: #94a3b8;
+      margin-top: 30px;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <header>
+      <h1>🔒 Unlock Pro</h1>
+      <p>Upgrade your dictionary experience with powerful Pro features</p>
+    </header>
+
+    <div class="card">
+      <h2>🚀 Pro Plans</h2>
+
+      <div class="plans">
+        <div class="plan">
+          <h3>Monthly</h3>
+          <div class="price">₹29</div>
+          <ul>
+            <li>✔ 5 English + 5 Hindi synonyms</li>
+            <li>✔ Antonyms</li>
+            <li>✔ Fast popup</li>
+          </ul>
+        </div>
+
+        <div class="plan">
+          <h3>Yearly</h3>
+          <div class="price">₹199</div>
+          <ul>
+            <li>✔ All Monthly features</li>
+            <li>✔ Best value</li>
+            <li>✔ Future AI features</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="card pay-section">
+      <h2>💳 Pay via UPI</h2>
+      <p style="color:#64748b;">Scan QR or pay to your UPI ID</p>
+
+      <!-- Replace with your QR -->
+      <img src="qr.png" alt="UPI QR" class="qr">
+
+      <input id="utr" placeholder="Enter UTR / Reference Number" maxlength="20">
+      <button onclick="generateLicense()">Generate License</button>
+
+      <div id="license" class="license-box"></div>
+    </div>
+
+    <footer>
+      © 2026 Smart Dictionary • Secure • No Ads in Pro
+    </footer>
+  </div>
+
+  <script>
+    function generateLicense() {
+      const utr = document.getElementById("utr").value.trim();
+      if (utr.length < 6) {
+        alert("Please enter valid UTR");
+        return;
+      }
+
+      const license =
+        "PRO-" +
+        btoa(utr + navigator.userAgent)
+          .replace(/[^A-Z0-9]/gi, "")
+          .substring(0, 14)
+          .toUpperCase();
+
+      localStorage.setItem("pro_license", license);
+
+      const box = document.getElementById("license");
+      box.style.display = "block";
+      box.innerText = "Your License:\n" + license;
+    }
+  </script>
+
+</body>
+</html>
