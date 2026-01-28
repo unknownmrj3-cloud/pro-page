@@ -1,226 +1,312 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Unlock Pro – Smart Dictionary</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Unlock Pro – Smart Dictionary</title>
 
-  <style>
-    * {
-      box-sizing: border-box;
-      font-family: "Segoe UI", system-ui, -apple-system, sans-serif;
-    }
+<style>
+:root{
+  --primary:#2563eb;
+  --secondary:#16a34a;
+  --bg:#f8fafc;
+  --card:#ffffff;
+  --text:#0f172a;
+  --muted:#64748b;
+}
 
-    body {
-      margin: 0;
-      background: #f8fafc;
-      color: #0f172a;
-    }
+*{
+  box-sizing:border-box;
+  font-family: "Segoe UI", system-ui, -apple-system, sans-serif;
+}
 
-    .container {
-      max-width: 900px;
-      margin: auto;
-      padding: 24px;
-    }
+body{
+  margin:0;
+  background:linear-gradient(135deg,#eef2ff,#f0fdf4);
+  color:var(--text);
+}
 
-    header {
-      text-align: center;
-      margin-bottom: 32px;
-    }
+.container{
+  max-width:900px;
+  margin:auto;
+  padding:24px;
+}
 
-    header h1 {
-      font-size: 32px;
-      color: #2563eb;
-      margin-bottom: 8px;
-    }
+header{
+  text-align:center;
+  margin-bottom:36px;
+}
 
-    header p {
-      color: #64748b;
-      font-size: 16px;
-    }
+header h1{
+  font-size:34px;
+  color:var(--primary);
+  margin-bottom:8px;
+}
 
-    .card {
-      background: #ffffff;
-      border-radius: 14px;
-      box-shadow: 0 10px 25px rgba(0,0,0,0.06);
-      padding: 24px;
-      margin-bottom: 24px;
-    }
+header p{
+  color:var(--muted);
+  font-size:16px;
+}
 
-    .plans {
-      display: flex;
-      gap: 16px;
-      flex-wrap: wrap;
-    }
+.card{
+  background:var(--card);
+  border-radius:16px;
+  box-shadow:0 12px 30px rgba(0,0,0,.08);
+  padding:26px;
+  margin-bottom:26px;
+}
 
-    .plan {
-      flex: 1;
-      border: 2px solid #e5e7eb;
-      border-radius: 12px;
-      padding: 20px;
-      text-align: center;
-      transition: 0.2s;
-    }
+.badge{
+  display:inline-block;
+  padding:6px 14px;
+  border-radius:999px;
+  font-size:13px;
+  font-weight:600;
+}
 
-    .plan:hover {
-      transform: translateY(-4px);
-      border-color: #2563eb;
-    }
+.badge.free{
+  background:#ecfeff;
+  color:#0369a1;
+}
 
-    .plan h3 {
-      margin: 0;
-      color: #2563eb;
-    }
+.badge.pro{
+  background:#ecfdf5;
+  color:#065f46;
+}
 
-    .price {
-      font-size: 28px;
-      font-weight: bold;
-      margin: 12px 0;
-      color: #16a34a;
-    }
+.plans{
+  display:flex;
+  gap:18px;
+  flex-wrap:wrap;
+}
 
-    .plan ul {
-      list-style: none;
-      padding: 0;
-      font-size: 14px;
-      color: #475569;
-    }
+.plan{
+  flex:1;
+  border:2px solid #e5e7eb;
+  border-radius:14px;
+  padding:20px;
+  text-align:center;
+  transition:.25s;
+  background:#fafafa;
+}
 
-    .plan ul li {
-      margin: 6px 0;
-    }
+.plan:hover{
+  transform:none;
+  border-color:#e5e7eb;
+  box-shadow:none;
 
-    .pay-section {
-      text-align: center;
-    }
+}
 
-    .qr {
-      width: 220px;
-      max-width: 100%;
-      margin: 16px auto;
-      border-radius: 12px;
-      border: 1px solid #e5e7eb;
-    }
+.plan h3{
+  margin:0;
+  color:var(--primary);
+}
 
-    input {
-      width: 100%;
-      padding: 12px;
-      font-size: 15px;
-      border-radius: 8px;
-      border: 1px solid #cbd5f5;
-      margin-top: 10px;
-    }
+.price{
+  font-size:30px;
+  font-weight:800;
+  margin:14px 0;
+  color:var(--secondary);
+}
 
-    button {
-      width: 100%;
-      margin-top: 12px;
-      padding: 12px;
-      font-size: 16px;
-      background: #2563eb;
-      color: #fff;
-      border: none;
-      border-radius: 10px;
-      cursor: pointer;
-      transition: 0.2s;
-    }
+.plan ul{
+  list-style:none;
+  padding:0;
+  font-size:14px;
+  color:#475569;
+}
 
-    button:hover {
-      background: #1d4ed8;
-    }
+.plan ul li{
+  margin:8px 0;
+}
 
-    .license-box {
-      margin-top: 16px;
-      background: #ecfdf5;
-      border: 1px dashed #16a34a;
-      padding: 12px;
-      border-radius: 8px;
-      font-weight: bold;
-      color: #065f46;
-      display: none;
-    }
+.free-box{
+  text-align:center;
+  background:linear-gradient(135deg,#eff6ff,#ecfeff);
+}
 
-    footer {
-      text-align: center;
-      font-size: 13px;
-      color: #94a3b8;
-      margin-top: 30px;
-    }
-  </style>
+.timer{
+  font-size:34px;
+  font-weight:800;
+  color:#1d4ed8;
+  margin:12px 0;
+}
+
+button{
+  width:100%;
+  padding:14px;
+  font-size:16px;
+  background:var(--primary);
+  color:#fff;
+  border:none;
+  border-radius:12px;
+  cursor:pointer;
+  transition:.2s;
+}
+
+button:disabled{
+  background:#94a3b8;
+  cursor:not-allowed;
+}
+
+button:hover:not(:disabled){
+  background:#1d4ed8;
+}
+
+.qr{
+  width:220px;
+  max-width:100%;
+  border-radius:14px;
+  border:1px solid #e5e7eb;
+  margin:16px auto;
+}
+
+.contact{
+  display:flex;
+  gap:14px;
+  justify-content:center;
+  flex-wrap:wrap;
+}
+
+.contact a{
+  text-decoration:none;
+  padding:12px 18px;
+  border-radius:10px;
+  font-weight:600;
+  color:#fff;
+}
+
+.whatsapp{
+  background:#16a34a;
+}
+
+.telegram{
+  background:#2563eb;
+}
+
+footer{
+  text-align:center;
+  font-size:13px;
+  color:#94a3b8;
+  margin-top:30px;
+}
+.contact a{
+  text-decoration:none;
+  padding:12px 18px;
+  border-radius:10px;
+  font-weight:600;
+  color:#fff;
+  transition:all .25s ease;
+}
+
+/* Hover effects */
+.contact a:hover{
+  transform:translateY(-3px);
+  box-shadow:0 8px 18px rgba(0,0,0,.25);
+  opacity:.
+
+</style>
 </head>
+
 <body>
 
-  <div class="container">
-    <header>
-      <h1>🔒 Unlock Pro</h1>
-      <p>Upgrade your dictionary experience with powerful Pro features</p>
-    </header>
+<div class="container">
 
-    <div class="card">
-      <h2>🚀 Pro Plans</h2>
+<header>
+  <h1>🔓 Unlock Pro</h1>
+  <p>Upgrade your dictionary experience — free or paid, your choice</p>
+</header>
 
-      <div class="plans">
-        <div class="plan">
-          <h3>Monthly</h3>
-          <div class="price">₹29</div>
-          <ul>
-            <li>✔ 5 English + 5 Hindi synonyms</li>
-            <li>✔ Antonyms</li>
-            <li>✔ Fast popup</li>
-          </ul>
-        </div>
+<!-- FREE UNLOCK -->
+<div class="card free-box">
+  <span class="badge free">🎁 FREE PRO</span>
+  <h2 style="margin-top:14px;">Unlock Pro for 24 Hours</h2>
+  <p style="color:#475569;">
+    Wait for <b>30 seconds</b> and get automatic Pro access for <b>24 hours</b>.
+  </p>
 
-        <div class="plan">
-          <h3>Yearly</h3>
-          <div class="price">₹199</div>
-          <ul>
-            <li>✔ All Monthly features</li>
-            <li>✔ Best value</li>
-            <li>✔ Future AI features</li>
-          </ul>
-        </div>
-      </div>
+  <div id="timer" class="timer">30</div>
+
+  <button id="unlockBtn" disabled>Unlock Pro for 24 Hours</button>
+
+  <p style="font-size:13px;color:#64748b;margin-top:10px;">
+    No payment required • Auto expires after 24 hours
+  </p>
+</div>
+
+<!-- PAID PLANS -->
+<div class="card">
+  <span class="badge pro">⭐ AD-FREE PRO</span>
+  <h2 style="margin-top:14px;">Paid Pro Plans</h2>
+
+  <div class="plans">
+    <div class="plan">
+      <h3>Monthly Pro</h3>
+      <div class="price">₹29</div>
+      <ul>
+        <li>✔ No ads</li>
+        <li>✔ No waiting</li>
+        <li>✔ Full Pro features</li>
+      </ul>
     </div>
 
-    <div class="card pay-section">
-      <h2>💳 Pay via UPI</h2>
-      <p style="color:#64748b;">Scan QR or pay to your UPI ID</p>
-
-      <!-- Replace with your QR -->
-      <img src="qr.png" alt="UPI QR" class="qr">
-
-      <input id="utr" placeholder="Enter UTR / Reference Number" maxlength="20">
-      <button onclick="generateLicense()">Generate License</button>
-
-      <div id="license" class="license-box"></div>
+    <div class="plan">
+      <h3>Yearly Pro</h3>
+      <div class="price">₹199</div>
+      <ul>
+        <li>✔ All Monthly features</li>
+        <li>✔ Best value</li>
+        <li>✔ Priority support</li>
+      </ul>
     </div>
-
-    <footer>
-      © 2026 Smart Dictionary • Secure • No Ads in Pro
-    </footer>
   </div>
+</div>
 
-  <script>
-    function generateLicense() {
-      const utr = document.getElementById("utr").value.trim();
-      if (utr.length < 6) {
-        alert("Please enter valid UTR");
-        return;
-      }
+<!-- CONTACT -->
+<div class="card" style="text-align:center;">
+  <h2>💬 Want Ad-Free Pro?</h2>
+  <p style="color:#64748b;">
+    Contact us after payment and get your Pro license.
+  </p>
 
-      const license =
-        "PRO-" +
-        btoa(utr + navigator.userAgent)
-          .replace(/[^A-Z0-9]/gi, "")
-          .substring(0, 14)
-          .toUpperCase();
+  <div class="contact">
+    <a class="whatsapp" href="https://wa.me/91XXXXXXXXXX" target="_blank">
+      WhatsApp
+    </a>
+    <a class="telegram" href="https://t.me/yourusername" target="_blank">
+      Telegram
+    </a>
+  </div>
+</div>
 
-      localStorage.setItem("pro_license", license);
+<footer>
+  © 2026 Smart Dictionary • Secure • User Friendly
+</footer>
 
-      const box = document.getElementById("license");
-      box.style.display = "block";
-      box.innerText = "Your License:\n" + license;
-    }
-  </script>
+</div>
+
+<script>
+let time = 30;
+const timerEl = document.getElementById("timer");
+const btn = document.getElementById("unlockBtn");
+
+const countdown = setInterval(() => {
+  time--;
+  timerEl.textContent = time;
+
+  if(time <= 0){
+    clearInterval(countdown);
+    btn.disabled = false;
+    timerEl.textContent = "🎉 Ready!";
+  }
+},1000);
+
+btn.onclick = () => {
+  const expiry = Date.now() + 24*60*60*1000;
+  localStorage.setItem("temp_pro_until", expiry);
+  alert("Pro unlocked for 24 hours! You can close this page.");
+};
+</script>
 
 </body>
-</html>
+</html>  
